@@ -5,6 +5,41 @@ namespace ClipboardButler
 {
     internal static class TrayManager
     {
+        private const int WM_RBUTTONUP = 0x0205;
+        private const uint TPM_LEFTALIGN = 0x0000;
+        private const uint TPM_RETURNCMD = 0x0100;
+        private const uint MF_STRING = 0x0000;
+        private const uint IDM_QUIT = 1000;
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern IntPtr CreatePopupMenu();
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool AppendMenu(IntPtr hMenu, uint uFlags, uint uIDNewItem, string lpNewItem);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern uint TrackPopupMenu(IntPtr hMenu, uint uFlags, int x, int y, int nReserved, IntPtr hWnd, IntPtr prcRect);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool DestroyMenu(IntPtr hMenu);
+
+        [DllImport("user32.dll")]
+        private static extern bool GetCursorPos(out POINT lpPoint);
+
+        [DllImport("user32.dll")]
+        private static extern void PostQuitMessage(int nExitCode);
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct POINT
+        {
+            public int X;
+            public int Y;
+        }
+
         private delegate IntPtr WindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
@@ -79,6 +114,7 @@ namespace ClipboardButler
                 IntPtr.Zero, IntPtr.Zero, GetModuleHandle(null), IntPtr.Zero);
         }
 
+
         public static void AddToSystemTray(IntPtr hWnd)
         {
             var hInstance = GetModuleHandle(null);
@@ -98,6 +134,7 @@ namespace ClipboardButler
             Shell_NotifyIcon(NIM_ADD, ref notifyIconData);
         }
 
+
         private static IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
         {
             switch (msg)
@@ -107,12 +144,34 @@ namespace ClipboardButler
                     {
                         // Handle left button click
                     }
+                    else if (lParam.ToInt32() == WM_RBUTTONUP)
+                    {
+                        ShowContextMenu(hWnd);
+                    }
                     break;
                 default:
                     return DefWindowProc(hWnd, msg, wParam, lParam);
             }
             return IntPtr.Zero;
         }
+
+        private static void ShowContextMenu(IntPtr hWnd)
+        {
+            IntPtr hMenu = CreatePopupMenu();
+            AppendMenu(hMenu, MF_STRING, IDM_QUIT, "Quit");
+
+            GetCursorPos(out POINT cursorPos);
+            SetForegroundWindow(hWnd);  // Make sure the menu is displayed correctly
+            uint cmd = TrackPopupMenu(hMenu, TPM_LEFTALIGN | TPM_RETURNCMD, cursorPos.X, cursorPos.Y, 0, hWnd, IntPtr.Zero);
+
+            if (cmd == IDM_QUIT)
+            {
+                PostQuitMessage(0);
+            }
+
+            DestroyMenu(hMenu);
+        }
+
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern ushort RegisterClassEx([In] ref WNDCLASSEX lpwcx);
