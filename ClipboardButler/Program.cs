@@ -42,7 +42,7 @@ namespace ClipboardButler
 
         private const int SW_HIDE = 0;
         private const int SW_SHOW = 5;
-        private const uint CF_TEXT = 1;
+        private const uint CF_UNICODETEXT = 13;
         private const uint GMEM_MOVEABLE = 0x0002;
 
         static async Task Main(string[] args)
@@ -59,8 +59,10 @@ namespace ClipboardButler
                     string clipboardText = GetClipboardText();
                     if (!string.IsNullOrEmpty(clipboardText))
                     {
-                        string cleanText = clipboardText.ToUpper();
-                        SetClipboardText(cleanText);
+                        if(TextCleaner.TryClean(clipboardText, out var cleanText))
+                        {
+                            SetClipboardText(cleanText);
+                        }
                     }
                 }
                 finally
@@ -73,7 +75,7 @@ namespace ClipboardButler
 
         private static string GetClipboardText()
         {
-            if (!IsClipboardFormatAvailable(CF_TEXT))
+            if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
             {
                 return null;
             }
@@ -83,7 +85,7 @@ namespace ClipboardButler
                 return null;
             }
 
-            IntPtr handle = GetClipboardData(CF_TEXT);
+            IntPtr handle = GetClipboardData(CF_UNICODETEXT);
             if (handle == IntPtr.Zero)
             {
                 CloseClipboard();
@@ -97,7 +99,7 @@ namespace ClipboardButler
                 return null;
             }
 
-            string clipboardText = Marshal.PtrToStringAnsi(pointer);
+            string clipboardText = Marshal.PtrToStringUni(pointer);
             GlobalUnlock(handle);
             CloseClipboard();
 
@@ -115,8 +117,8 @@ namespace ClipboardButler
             IntPtr hMem = IntPtr.Zero;
             try
             {
-                int bytes = (text.Length + 1) * Marshal.SystemMaxDBCSCharSize;
-                hGlobal = Marshal.StringToHGlobalAnsi(text);
+                int bytes = (text.Length + 1) * 2; // UTF-16, hence * 2
+                hGlobal = Marshal.StringToHGlobalUni(text);
                 if (hGlobal == IntPtr.Zero)
                 {
                     throw new Exception("Failed to allocate memory for clipboard text.");
@@ -136,17 +138,15 @@ namespace ClipboardButler
 
                 try
                 {
-                    // Copy the ANSI string into the pointer manually
-                    byte[] buffer = Encoding.Default.GetBytes(text);
-                    Marshal.Copy(buffer, 0, pointer, buffer.Length);
-                    Marshal.WriteByte(pointer, buffer.Length, 0); // Null-terminate the string
+                    Marshal.Copy(text.ToCharArray(), 0, pointer, text.Length);
+                    Marshal.WriteInt16(pointer, text.Length * 2, 0); // Null-terminate the string
                 }
                 finally
                 {
                     GlobalUnlock(hMem);
                 }
 
-                if (SetClipboardData(CF_TEXT, hMem) == IntPtr.Zero)
+                if (SetClipboardData(CF_UNICODETEXT, hMem) == IntPtr.Zero)
                 {
                     throw new Exception("Failed to set clipboard data.");
                 }
