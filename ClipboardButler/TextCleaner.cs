@@ -10,9 +10,9 @@ namespace ClipboardButler
     {
         public static bool TryClean(string dirty, out string clean)
         {
-            // Check if the URL starts with "https://youtu.be/"
             string youtuBePrefix = "https://youtu.be/";
             string youtubePrefix = "https://www.youtube.com/watch?v=";
+            string googleRedirectPrefix = "https://www.google.com/url?q=";
 
             if (dirty.StartsWith(youtuBePrefix))
             {
@@ -40,6 +40,22 @@ namespace ClipboardButler
                 }
                 // If no query parameters are found, return the original URL
                 clean = dirty;
+                return true;
+            }
+            else if (dirty.StartsWith(googleRedirectPrefix))
+            {
+                // Extract the actual URL from the Google redirect URL
+                int startIndex = googleRedirectPrefix.Length;
+                int endIndex = dirty.IndexOf('&', startIndex);
+                if (endIndex > -1)
+                {
+                    clean = dirty.Substring(startIndex, endIndex - startIndex);
+                }
+                else
+                {
+                    clean = dirty.Substring(startIndex);
+                }
+                clean = Uri.UnescapeDataString(clean);
                 return true;
             }
 
