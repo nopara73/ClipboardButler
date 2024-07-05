@@ -10,37 +10,36 @@ namespace ClipboardButler
     {
         public static bool TryClean(string dirty, out string clean)
         {
-            string youtuBePrefix = "https://youtu.be/";
-            string youtubePrefix = "https://www.youtube.com/watch?v=";
+            string youtubePrefix1 = "https://www.youtube.com/";
+            string youtubePrefix2 = "https://youtu.be/";
             string googleRedirectPrefix = "https://www.google.com/url?q=";
+            string xPrefix = "https://x.com/";
+            string twitterPrefix = "https://twitter.com/";
 
-            if (dirty.StartsWith(youtuBePrefix))
+            if (dirty.StartsWith(youtubePrefix1)
+                || dirty.StartsWith(youtubePrefix2))
             {
                 // Find the position of the '?' character
                 int questionMarkIndex = dirty.IndexOf('?');
-                if (questionMarkIndex > -1)
+                int qsIndex = dirty.IndexOf("?si=");
+                if (questionMarkIndex > -1 && qsIndex > -1)
                 {
                     // Return the URL without the query parameters
                     clean = dirty.Substring(0, questionMarkIndex);
                     return true;
                 }
-                // If no query parameters are found, return the original URL
-                clean = dirty;
-                return true;
-            }
-            else if (dirty.StartsWith(youtubePrefix))
-            {
+
+
                 // Find the position of the '&' character
                 int ampersandIndex = dirty.IndexOf('&');
-                if (ampersandIndex > -1)
+                int wIndex = dirty.IndexOf("/watch?v=");
+                int abchannelIndex = dirty.IndexOf("&ab_channel");
+                if (ampersandIndex > -1 && wIndex > -1 && abchannelIndex > -1)
                 {
                     // Return the URL without the query parameters after the video ID
                     clean = dirty.Substring(0, ampersandIndex);
                     return true;
                 }
-                // If no query parameters are found, return the original URL
-                clean = dirty;
-                return true;
             }
             else if (dirty.StartsWith(googleRedirectPrefix))
             {
@@ -57,6 +56,20 @@ namespace ClipboardButler
                 }
                 clean = Uri.UnescapeDataString(clean);
                 return true;
+            }
+            else if (dirty.StartsWith(xPrefix)
+                || dirty.StartsWith(twitterPrefix))
+            {
+                // Find the position of the '?' character
+                int questionMarkIndex = dirty.IndexOf('?');
+                int qteIndex = dirty.IndexOf("?t=");
+                int aseIndex = dirty.IndexOf("&s=");
+                if (questionMarkIndex > -1 && qteIndex > -1 && aseIndex > -1)
+                {
+                    // Return the URL without the query parameters
+                    clean = dirty.Substring(0, questionMarkIndex);
+                    return true;
+                }
             }
 
             // Return the original URL if it doesn't match the known patterns
