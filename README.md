@@ -29,7 +29,7 @@ cd ClipboardButler/ClipboardButler
 dotnet build
 ```
 
-### Run Wasabi
+### Run ClipboardButler
 
 Run ClipboardButler with `dotnet run` from the `ClipboardButler` folder.  
 You can verify it's running by looking at the start menu.  
