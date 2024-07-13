@@ -12,12 +12,14 @@ namespace ClipboardButler
         {
             string youtubePrefix1 = "https://www.youtube.com/";
             string youtubePrefix2 = "https://youtu.be/";
+            string youtubeClipPrefix = "https://youtube.com/clip/";
             string googleRedirectPrefix = "https://www.google.com/url?q=";
             string xPrefix = "https://x.com/";
             string twitterPrefix = "https://twitter.com/";
 
             if (dirty.StartsWith(youtubePrefix1)
-                || dirty.StartsWith(youtubePrefix2))
+                || dirty.StartsWith(youtubePrefix2)
+                || dirty.StartsWith(youtubeClipPrefix))
             {
                 // Find the position of the '?' character
                 int questionMarkIndex = dirty.IndexOf('?');
