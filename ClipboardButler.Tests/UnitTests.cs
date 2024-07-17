@@ -12,6 +12,7 @@ namespace ClipboardButler.Tests
         [InlineData("https://x.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09", "https://x.com/nopara73")]
         [InlineData("https://twitter.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09", "https://twitter.com/nopara73")]
         [InlineData("https://youtube.com/clip/UgkxqiiZXWjZ0UecWh70gsdZT4vr91uEhl_q?si=4AaWzv636s38XYpy", "https://youtube.com/clip/UgkxqiiZXWjZ0UecWh70gsdZT4vr91uEhl_q")]
+        [InlineData("https://www.youtube.com/watch?v=XCT1WCYZOpM&feature=youtu.be", "https://www.youtube.com/watch?v=XCT1WCYZOpM")]
         public void TrackingUrls(string input, string expected)
         {
             // Act
