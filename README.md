@@ -11,6 +11,7 @@ Non-invasive clipboard cleaner. Removes tracking links and other dark patterns.
 - This: `https://x.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09` becomes this: `https://x.com/nopara73`
 - This: `https://twitter.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09` becomes this: `https://twitter.com/nopara73`
 - This: `https://www.youtube.com/watch?v=XCT1WCYZOpM&feature=youtu.be` becomes this: `https://www.youtube.com/watch?v=XCT1WCYZOpM`
+- This: `https://www.amazon.com/gp/product/B0C15QMSHH/ref=ox_sc_act_title_3?smid=A30IGBX08D2XOT&psc=1` becomes this: `https://www.amazon.com/gp/product/B0C15QMSHH`
 
 
 

@@ -16,6 +16,7 @@ namespace ClipboardButler
             string googleRedirectPrefix = "https://www.google.com/url?q=";
             string xPrefix = "https://x.com/";
             string twitterPrefix = "https://twitter.com/";
+            string amazonProductPrefix = "https://www.amazon.com/gp/product/";
 
             if (dirty.StartsWith(youtubePrefix1)
                 || dirty.StartsWith(youtubePrefix2)
@@ -77,6 +78,16 @@ namespace ClipboardButler
                 {
                     // Return the URL without the query parameters
                     clean = dirty.Substring(0, questionMarkIndex);
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(amazonProductPrefix))
+            {
+                int refIndex = dirty.IndexOf("/ref=");
+                if (refIndex > -1)
+                {
+                    // Return the URL without the query parameters
+                    clean = dirty.Substring(0, refIndex);
                     return true;
                 }
             }
