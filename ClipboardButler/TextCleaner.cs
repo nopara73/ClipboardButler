@@ -37,17 +37,24 @@ namespace ClipboardButler
                 int ampersandIndex = dirty.IndexOf('&');
                 int wIndex = dirty.IndexOf("/watch?v=");
                 int abchannelIndex = dirty.IndexOf("&ab_channel");
-                int featureIndex = dirty.IndexOf("&feature=youtu.be");
+                int feature1Index = dirty.IndexOf("&feature=youtu.be");
+                int feature2Index = dirty.IndexOf("?feature=shared");
                 if (ampersandIndex > -1 && wIndex > -1 && abchannelIndex > -1)
                 {
                     // Return the URL without the query parameters after the video ID
                     clean = dirty.Substring(0, ampersandIndex);
                     return true;
                 }
-                if (featureIndex > -1 && wIndex > -1 && featureIndex > -1)
+                if (feature1Index > -1 && wIndex > -1 && feature1Index > -1)
                 {
                     // Return the URL without the query parameters after the video ID
-                    clean = dirty.Substring(0, featureIndex);
+                    clean = dirty.Substring(0, feature1Index);
+                    return true;
+                }
+                if (feature2Index > -1 && feature2Index > -1)
+                {
+                    // Return the URL without the query parameters after the video ID
+                    clean = dirty.Substring(0, feature2Index);
                     return true;
                 }
             }
