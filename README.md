@@ -4,8 +4,6 @@ Non-invasive clipboard cleaner. Removes tracking links and other dark patterns.
 
 ![image](https://github.com/nopara73/ClipboardButler/assets/9156103/84c1ff59-4ddf-4e1c-9199-815405962ecc)
 
-Here are the links with the order changed as requested:
-
 | This:                                                            | From This:                                                                                                                                                 |
 |------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `https://youtu.be/7aQ2VdV_S_Y`                                   | `https://youtu.be/7aQ2VdV_S_Y?si=gx0Hcg3hF9fWKcKh`                                                                                                         |
