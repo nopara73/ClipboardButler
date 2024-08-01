@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ClipboardButler
 {
@@ -17,6 +18,7 @@ namespace ClipboardButler
             string xPrefix = "https://x.com/";
             string twitterPrefix = "https://twitter.com/";
             string amazonProductPrefix = "https://www.amazon.com/gp/product/";
+            string facebookLinkPrefix = "https://l.facebook.com/l.php?u=";
 
             if (dirty.StartsWith(youtubePrefix1)
                 || dirty.StartsWith(youtubePrefix2)
@@ -97,6 +99,21 @@ namespace ClipboardButler
                     clean = dirty.Substring(0, refIndex);
                     return true;
                 }
+            }
+            else if (dirty.StartsWith(facebookLinkPrefix))
+            {
+                int startIndex = facebookLinkPrefix.Length;
+                int endIndex = dirty.IndexOf("%3Ffbclid", startIndex);
+                if (endIndex > -1)
+                {
+                    clean = dirty.Substring(startIndex, endIndex - startIndex);
+                }
+                else
+                {
+                    clean = dirty.Substring(startIndex);
+                }
+                clean = Uri.UnescapeDataString(HttpUtility.UrlDecode(clean));
+                return true;
             }
 
             // Return the original URL if it doesn't match the known patterns
