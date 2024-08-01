@@ -4,16 +4,21 @@ Non-invasive clipboard cleaner. Removes tracking links and other dark patterns.
 
 ![image](https://github.com/nopara73/ClipboardButler/assets/9156103/84c1ff59-4ddf-4e1c-9199-815405962ecc)
 
-- This: `https://youtu.be/7aQ2VdV_S_Y?si=gx0Hcg3hF9fWKcKh` becomes this: `https://youtu.be/7aQ2VdV_S_Y`
-- This: `https://www.youtube.com/watch?v=7aQ2VdV_S_Y&ab_channel=nopara73` becomes this: `https://www.youtube.com/watch?v=7aQ2VdV_S_Y`
-- This: `https://youtube.com/clip/UgkxqiiZXWjZ0UecWh70gsdZT4vr91uEhl_q?si=4AaWzv636s38XYpy` becomes this: `https://youtube.com/clip/UgkxqiiZXWjZ0UecWh70gsdZT4vr91uEhl_q`
-- This: `https://youtu.be/84gIeFO6ipE?feature=shared` becomes this: `https://youtu.be/84gIeFO6ipE`
-- This: `https://www.google.com/url?q=https://fast.com/&sa=D&source=calendar&usd=2&usg=AOvVaw2-43fyjEok_J83Gbx6W6Xw` becomes this: `https://fast.com`
-- This: `https://x.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09` becomes this: `https://x.com/nopara73`
-- This: `https://twitter.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09` becomes this: `https://twitter.com/nopara73`
-- This: `https://www.youtube.com/watch?v=XCT1WCYZOpM&feature=youtu.be` becomes this: `https://www.youtube.com/watch?v=XCT1WCYZOpM`
-- This: `https://www.amazon.com/gp/product/B0C15QMSHH/ref=ox_sc_act_title_3?smid=A30IGBX08D2XOT&psc=1` becomes this: `https://www.amazon.com/gp/product/B0C15QMSHH`
-- This: `https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2Fnopara73%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR0OYOUskmn7ar7wAkaH2cN2QvPiFsuVnSyHsto-KXbGLUFvau-n4LSYT-k_aem_PQMJxkEQHetzw1u3ITfwRA&h=AT1Rv7XogRbqmfGnTfnPkl-XEjwUTT40WD8cZeOlwQSvBAY1OYMYVzT45Ynx-8tj-TJ4OXtgu6JtWttePoyMFTS4Q3ng92BWc3AuuzlCMaa9a-j0dNjOD3QeHGcyNbsX3WI` becomes this: `https://x.com/nopara73`
+Here are the links with the order changed as requested:
+
+| This:                                                            | From This:                                                                                                                                                 |
+|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `https://youtu.be/7aQ2VdV_S_Y`                                   | `https://youtu.be/7aQ2VdV_S_Y?si=gx0Hcg3hF9fWKcKh`                                                                                                         |
+| `https://www.youtube.com/watch?v=7aQ2VdV_S_Y`                    | `https://www.youtube.com/watch?v=7aQ2VdV_S_Y&ab_channel=nopara73`                                                                                         |
+| `https://youtube.com/clip/UgkxqiiZXWjZ0UecWh70gsdZT4vr91uEhl_q` | `https://youtube.com/clip/UgkxqiiZXWjZ0UecWh70gsdZT4vr91uEhl_q?si=4AaWzv636s38XYpy`                                                                       |
+| `https://youtu.be/84gIeFO6ipE`                                   | `https://youtu.be/84gIeFO6ipE?feature=shared`                                                                                                              |
+| `https://fast.com`                                               | `https://www.google.com/url?q=https://fast.com/&sa=D&source=calendar&usd=2&usg=AOvVaw2-43fyjEok_J83Gbx6W6Xw`                                               |
+| `https://x.com/nopara73`                                         | `https://x.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09`                                                                                                     |
+| `https://twitter.com/nopara73`                                   | `https://twitter.com/nopara73?t=XL6mz6zGWAjMvByoVLXHgA&s=09`                                                                                               |
+| `https://www.youtube.com/watch?v=XCT1WCYZOpM`                    | `https://www.youtube.com/watch?v=XCT1WCYZOpM&feature=youtu.be`                                                                                             |
+| `https://www.amazon.com/gp/product/B0C15QMSHH`                   | `https://www.amazon.com/gp/product/B0C15QMSHH/ref=ox_sc_act_title_3?smid=A30IGBX08D2XOT&psc=1`                                                             |
+| `https://x.com/nopara73`                                         | `https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2Fnopara73%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR0OYOUskmn7ar7wAkaH2cN2QvPiFsuVnSyHsto-KXbGLUFvau-n4LSYT-k_aem_PQMJxkEQHetzw1u3ITfwRA&h=AT1Rv7XogRbqmfGnTfnPkl-XEjwUTT40WD8cZeOlwQSvBAY1OYMYVzT45Ynx-8tj-TJ4OXtgu6JtWttePoyMFTS4Q3ng92BWc3AuuzlCMaa9a-j0dNjOD3QeHGcyNbsX3WI` |
+
 
 
 ## How To Use
