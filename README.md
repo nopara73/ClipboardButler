@@ -1,6 +1,6 @@
 # ClipboardButler
 
-Non-invasive clipboard cleaner. Removes tracking links and other dark patterns.
+Non-invasive clipboard cleaner. Removes tracking links, other dark patterns and poor programming decisions.
 
 ![image](https://github.com/nopara73/ClipboardButler/assets/9156103/84c1ff59-4ddf-4e1c-9199-815405962ecc)
 
