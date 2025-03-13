@@ -27,6 +27,7 @@ namespace ClipboardButler.Tests
         [InlineData("https://www.alza.hu/EN/57-samsung-odyssey-neo-g9-d7915024.htm?gclid=Cj0KCQiAuou6BhDhARIsAIfgrn7gR3c-1lau8-S0ZISEXegCB9MeTzymiQu3_H-bH4T-rTUtbAlIKWIaAtj1EALw_wcB&kampan=adw1_alza_pla_all_bfr_monitory_c_9106144_WH605Q4", "https://www.alza.hu/EN/57-samsung-odyssey-neo-g9-d7915024.htm")]
         [InlineData("https://www.google.com/url?q=https://cantunsee.space/&sa=D&source=calendar&usd=2&usg=AOvVaw3A4OinmjefbrfMab0QbCRY", "https://cantunsee.space/")]
         [InlineData("https://calendly.com/asdasdasd/dsgwefwef?back=1&month=2025-03", "https://calendly.com/asdasdasd/dsgwefwef")]
+        [InlineData(" https://calendly.com/asdasdasd/dsgwefwef?back=1&month=2025-03 ", "https://calendly.com/asdasdasd/dsgwefwef")]
         public void TrackingUrls(string input, string expected)
         {
             // Act

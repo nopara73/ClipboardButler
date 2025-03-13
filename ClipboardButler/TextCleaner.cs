@@ -11,6 +11,7 @@ namespace ClipboardButler
     {
         public static bool TryClean(string dirty, out string clean)
         {
+            dirty = dirty.Trim();
             string youtubePrefix1 = "https://www.youtube.com/";
             string youtubePrefix2 = "https://youtu.be/";
             string youtubeClipPrefix = "https://youtube.com/clip/";
