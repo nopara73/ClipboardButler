@@ -19,6 +19,8 @@ namespace ClipboardButler
             string twitterPrefix = "https://twitter.com/";
             string amazonProductPrefix = "https://www.amazon.com/gp/product/";
             string facebookLinkPrefix = "https://l.facebook.com/l.php?u=";
+            string instagramReelPrefix = "https://www.instagram.com/reel/";
+            string instagramPostPrefix = "https://www.instagram.com/p/";
 
             if (dirty.StartsWith(youtubePrefix1)
                 || dirty.StartsWith(youtubePrefix2)
@@ -30,10 +32,9 @@ namespace ClipboardButler
                 if (questionMarkIndex > -1 && qsIndex > -1)
                 {
                     // Return the URL without the query parameters
-                    clean = dirty.Substring(0, questionMarkIndex);
+                    clean = dirty[..questionMarkIndex];
                     return true;
                 }
-
 
                 // Find the position of the '&' character
                 int ampersandIndex = dirty.IndexOf('&');
@@ -44,19 +45,19 @@ namespace ClipboardButler
                 if (ampersandIndex > -1 && wIndex > -1 && abchannelIndex > -1)
                 {
                     // Return the URL without the query parameters after the video ID
-                    clean = dirty.Substring(0, ampersandIndex);
+                    clean = dirty[..ampersandIndex];
                     return true;
                 }
                 if (feature1Index > -1 && wIndex > -1 && feature1Index > -1)
                 {
                     // Return the URL without the query parameters after the video ID
-                    clean = dirty.Substring(0, feature1Index);
+                    clean = dirty[..feature1Index];
                     return true;
                 }
                 if (feature2Index > -1 && feature2Index > -1)
                 {
                     // Return the URL without the query parameters after the video ID
-                    clean = dirty.Substring(0, feature2Index);
+                    clean = dirty[..feature2Index];
                     return true;
                 }
             }
@@ -67,11 +68,11 @@ namespace ClipboardButler
                 int endIndex = dirty.IndexOf('&', startIndex);
                 if (endIndex > -1)
                 {
-                    clean = dirty.Substring(startIndex, endIndex - startIndex);
+                    clean = dirty[startIndex..endIndex];
                 }
                 else
                 {
-                    clean = dirty.Substring(startIndex);
+                    clean = dirty[startIndex..];
                 }
                 clean = Uri.UnescapeDataString(clean);
                 return true;
@@ -86,7 +87,7 @@ namespace ClipboardButler
                 if (questionMarkIndex > -1 && qteIndex > -1 && aseIndex > -1)
                 {
                     // Return the URL without the query parameters
-                    clean = dirty.Substring(0, questionMarkIndex);
+                    clean = dirty[..questionMarkIndex];
                     return true;
                 }
             }
@@ -96,7 +97,7 @@ namespace ClipboardButler
                 if (refIndex > -1)
                 {
                     // Return the URL without the query parameters
-                    clean = dirty.Substring(0, refIndex);
+                    clean = dirty[..refIndex];
                     return true;
                 }
             }
@@ -106,14 +107,34 @@ namespace ClipboardButler
                 int endIndex = dirty.IndexOf("%3Ffbclid", startIndex);
                 if (endIndex > -1)
                 {
-                    clean = dirty.Substring(startIndex, endIndex - startIndex);
+                    clean = dirty[startIndex..endIndex];
                 }
                 else
                 {
-                    clean = dirty.Substring(startIndex);
+                    clean = dirty[startIndex..];
                 }
                 clean = Uri.UnescapeDataString(HttpUtility.UrlDecode(clean));
                 return true;
+            }
+            else if (dirty.StartsWith(instagramReelPrefix))
+            {
+                // Remove query parameters from Instagram reel URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(instagramPostPrefix))
+            {
+                // Remove query parameters from Instagram post URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
             }
 
             // Return the original URL if it doesn't match the known patterns
