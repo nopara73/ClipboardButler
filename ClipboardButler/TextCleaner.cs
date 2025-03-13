@@ -21,6 +21,14 @@ namespace ClipboardButler
             string facebookLinkPrefix = "https://l.facebook.com/l.php?u=";
             string instagramReelPrefix = "https://www.instagram.com/reel/";
             string instagramPostPrefix = "https://www.instagram.com/p/";
+            string oazisComputerPrefix = "https://oaziscomputer.hu/termek/";
+            string notebookHuPrefix = "https://www.notebook.hu/";
+            string samsungPrefix = "https://www.samsung.com/hu/monitors/gaming/";
+            string euronicsPrefix = "https://euronics.hu/gamer-monitor/";
+            string emagPrefix = "https://www.emag.hu/";
+            string iponPrefix = "https://ipon.hu/shop/termek/";
+            string alzaPrefix = "https://www.alza.hu/";
+            string calendlyPrefix = "https://calendly.com/";
 
             if (dirty.StartsWith(youtubePrefix1)
                 || dirty.StartsWith(youtubePrefix2)
@@ -129,6 +137,86 @@ namespace ClipboardButler
             else if (dirty.StartsWith(instagramPostPrefix))
             {
                 // Remove query parameters from Instagram post URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(oazisComputerPrefix))
+            {
+                // Remove query parameters from OazisComputer URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(notebookHuPrefix))
+            {
+                // Remove query parameters from Notebook.hu URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(samsungPrefix))
+            {
+                // Remove query parameters from Samsung URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(euronicsPrefix))
+            {
+                // Remove query parameters from Euronics.hu URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(emagPrefix))
+            {
+                // Remove query parameters from eMag.hu URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(iponPrefix))
+            {
+                // Remove query parameters from Ipon.hu URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(alzaPrefix))
+            {
+                // Remove query parameters from Alza.hu URLs
+                int questionMarkIndex = dirty.IndexOf('?');
+                if (questionMarkIndex > -1)
+                {
+                    clean = dirty[..questionMarkIndex];
+                    return true;
+                }
+            }
+            else if (dirty.StartsWith(calendlyPrefix))
+            {
+                // Remove query parameters from Calendly URLs
                 int questionMarkIndex = dirty.IndexOf('?');
                 if (questionMarkIndex > -1)
                 {
